@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Home } from "./components/Home";
+import { Switch, Route } from "react-router-dom";
+import { Header } from "./components/Header";
+import { Register } from "./pages/Register";
+import { Settings } from './pages/Settings';
+import { Login } from "./pages/Login";
+import { CreateEditor, EditEditor } from './pages/Editor';
+import { Profile } from './pages/Profile';
+import { Article } from './pages/Article';
+
+import { useGlobalState } from "./components/GlobalStateProvider";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const { appLoaded } = useGlobalState();
+  if (appLoaded) {
+    return (
+      <div>
+        <Header />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/register" component={Register} />
+          <Route path="/login" component={Login} />
+          <Route path="/settings" component={Settings} />
+          <Route path="/editor/:slug" component={EditEditor} />
+          <Route path="/editor" component={CreateEditor} />
+          <Route path="/@:username" component={Profile} />
+          <Route path="/article/:slug" component={Article} />
+        </Switch>
+      </div>
+    );
+  } else {
+    return <Header />;
+  }
 }
 
 export default App;

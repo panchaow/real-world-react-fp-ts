@@ -2,11 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { ConfigProvider } from './components/ConfigProvider';
+import { GlobalStateProvider } from './components/GlobalStateProvider';
+import { HashRouter, Route } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+
+const config = {
+  appName: "Conduit"
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ConfigProvider config={config}>
+      <GlobalStateProvider>
+        <HashRouter>
+          <Route path="/" component={App} />
+        </HashRouter>
+      </GlobalStateProvider>
+    </ConfigProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
