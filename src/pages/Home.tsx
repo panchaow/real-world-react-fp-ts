@@ -1,11 +1,11 @@
 import { useReducer, Reducer } from "react";
-import { Banner } from "./Banner";
-import { Tags } from "./Tags";
+import { Banner } from "../components/Home/Banner";
+import { Tags } from "../components/Home/Tags";
 
-import { useConfig } from "../ConfigProvider";
-import { useGlobalState } from "../GlobalStateProvider";
+import { useConfig } from "../components/ConfigProvider";
+import { useGlobalState } from "../components/GlobalStateProvider";
 
-import { ArticleList } from "../ArticleList";
+import { ArticleList } from "../components/ArticleList";
 
 interface State {
   tab: "all" | "feed" | "tag";
